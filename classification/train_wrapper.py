@@ -10,7 +10,6 @@ from tensorflow import reset_default_graph
 from classification.train import train_mtl, train_lifelong, train_den_net, train_ewc
 from classification.train_selective_transfer import train_lifelong_LASEM, train_lifelong_LASEM_fixedProb, train_lifelong_DARTS_hybridNN
 from classification.train_bruteforce_configsearch import train_lifelong_bruteforce_config_search
-from classification.obsolete_train_selective_transfer import train_lifelong_autoHybridDFCNN
 from classification.train_semisupervised import train_semilifelong
 from classification.gen_data import data_handler_for_experiment
 
@@ -353,8 +352,6 @@ def train_run_for_each_model(model_architecture, model_hyperpara, train_hyperpar
             train_result_tmp, num_model_para = train_den_net(model_architecture, model_hyperpara, train_hyperpara, [train_data, valid_data, test_data], data_type, classification_prob, doLifelong, useGPU, GPU_device, save_param=saveParam, param_folder_path=save_param_path, save_graph=(saveGraph and run_cnt < 1), task_order=task_order_this_run)
         elif ('ewc' in model_architecture) or ('elastic' in model_architecture):
             train_result_tmp, num_model_para = train_ewc(model_architecture, model_hyperpara, train_hyperpara, [train_data, valid_data, test_data], data_type, classification_prob, doLifelong, useGPU, GPU_device, save_param=saveParam, param_folder_path=save_param_path, save_graph=(saveGraph and run_cnt < 1))
-        #elif (model_architecture == 'hybrid_dfcnn_auto_sharing_ver2') or (model_architecture == 'hybrid_dfcnn_auto_sharing_ver4'):
-        #    train_result_tmp, num_model_para = train_lifelong_autoHybridDFCNN(model_architecture, model_hyperpara, train_hyperpara, [train_data, valid_data, test_data], data_type, classification_prob, useGPU, GPU_device, save_param=saveParam, param_folder_path=save_param_path, save_graph=(saveGraph and run_cnt < 1), tfInitParam=tf_init_params, run_cnt=run_cnt)
         elif ('lasem' in model_architecture) and ('fixed' not in model_architecture):
             train_result_tmp, num_model_para = train_lifelong_LASEM(model_architecture, model_hyperpara, train_hyperpara, [train_data, valid_data, test_data], data_type, classification_prob, useGPU, GPU_device, save_param=saveParam, param_folder_path=save_param_path, save_graph=(saveGraph and run_cnt < 1), tfInitParam=tf_init_params, run_cnt=run_cnt)
         elif (model_architecture == 'lasem_fixed_dfcnn'):
@@ -482,8 +479,6 @@ def train_run_for_each_model_v2(model_architecture, model_hyperpara, train_hyper
             train_result_tmp, num_model_para = train_den_net(model_architecture, model_hyperpara, train_hyperpara, [train_data, valid_data, test_data], data_type, classification_prob, doLifelong, useGPU, GPU_device, save_param=saveParam, param_folder_path=save_param_path, save_graph=(saveGraph and run_cnt < 1), task_order=task_order_this_run)
         elif ('ewc' in model_architecture) or ('elastic' in model_architecture):
             train_result_tmp, num_model_para = train_ewc(model_architecture, model_hyperpara, train_hyperpara, [train_data, valid_data, test_data], data_type, classification_prob, doLifelong, useGPU, GPU_device, save_param=saveParam, param_folder_path=save_param_path, save_graph=(saveGraph and run_cnt < 1))
-        #elif (model_architecture == 'hybrid_dfcnn_auto_sharing_ver2') or (model_architecture == 'hybrid_dfcnn_auto_sharing_ver4'):
-        #    train_result_tmp, num_model_para = train_lifelong_autoHybridDFCNN(model_architecture, model_hyperpara, train_hyperpara, [train_data, valid_data, test_data], data_type, classification_prob, useGPU, GPU_device, save_param=saveParam, param_folder_path=save_param_path, save_graph=(saveGraph and run_cnt < 1), tfInitParam=tf_init_params, run_cnt=run_cnt)
         elif ('lasem' in model_architecture) and ('fixed' not in model_architecture):
             train_result_tmp, num_model_para = train_lifelong_LASEM(model_architecture, model_hyperpara, train_hyperpara, [train_data, valid_data, test_data], data_type, classification_prob, useGPU, GPU_device, save_param=saveParam, param_folder_path=save_param_path, save_graph=(saveGraph and run_cnt < 1), tfInitParam=tf_init_params, run_cnt=run_cnt)
         elif (model_architecture == 'lasem_fixed_dfcnn'):
